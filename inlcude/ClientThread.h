@@ -6,8 +6,8 @@
 class ClientThread {
 public:
     ClientThread(SOCKET socket);
-    int receive();
-    int send();
+    int receive(char *buf, int len);
+    int send(char *buf, int len);
 private:
     SOCKET m_socket;
 };
