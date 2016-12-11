@@ -1,16 +1,18 @@
 #ifndef PACKET_H
 #define PACKET_H
 
-#include <string>
 #define PACKET_SIZE 512
 
 class Packet {
 private:
-    std::string m_buffer;
+    char *m_buffer;
+    int m_length;
 public:
     Packet(char *buffer);
+    ~Packet();
 
-    std::string getBuffer();
+    char *getBuffer();
+    int getLength();
 };
 
 #endif // PACKET_H

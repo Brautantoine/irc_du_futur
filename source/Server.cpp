@@ -80,8 +80,8 @@ void Server::start() {
     t.join();
 }
 
-void Server::broadcast(const char *buffer) {
+void Server::broadcast(Packet *packet) {
     for (auto *client : m_clients) {
-        client->send(buffer);
+        client->send(packet);
     }
 }

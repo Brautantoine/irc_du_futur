@@ -7,6 +7,8 @@ Server *server;
 void quit() {
     std::cout << "shutdown\n";
 
+    //error if has active clients
+
     server->close();
     delete server;
 
@@ -14,6 +16,7 @@ void quit() {
 }
 
 void signalHandler( int signum ) {
+
     std::cout << "Interrupt signal (" << signum << ") received.\n";
     quit();
 }

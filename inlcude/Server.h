@@ -1,6 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include "Packet.h"
 #include <winsock2.h>
 #include <vector>
 
@@ -22,7 +23,7 @@ public:
 
     void close();
     void start();
-    void broadcast(const char *buffer);
+    void broadcast(Packet *packet);
 };
 
 #endif // SERVER_H

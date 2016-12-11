@@ -12,7 +12,9 @@ void Client::loop() {
             break;
         }
 
-        m_server->broadcast(packet->getBuffer().c_str());
+        Packet *message = new Packet(packet->getBuffer());
+        m_server->broadcast(message);
+        delete message;
 
         delete packet;
     }
@@ -28,7 +30,7 @@ Client::~Client() {
     closesocket(m_socket);
 }
 
-void Client::send(const char *buffer) {
-    std::cout << "sending " << buffer << "\n";
-    ::send(m_socket, buffer, strlen(buffer), 0);
+void Client::send(Packet *packet) {
+    std::cout << "sending " << packet->getBuffer() << "\n";
+    ::send(m_socket, packet->getBuffer(), packet->getLength(), 0);
 }

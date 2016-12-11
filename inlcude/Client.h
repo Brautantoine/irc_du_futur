@@ -19,7 +19,7 @@ public:
     Client(SOCKET socket, Server *server);
     ~Client();
 
-    void send(const char *buffer);
+    void send(Packet *packet);
 };
 
 #endif // CLIENT_H

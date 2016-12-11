@@ -6,8 +6,9 @@ PacketInputStream::PacketInputStream(SOCKET socket) : m_socket(socket) {
 }
 
 Packet *PacketInputStream::nextPacket() {
-    char recvbuf[PACKET_SIZE];
-    memset(recvbuf, 0, sizeof(recvbuf));
+    char *recvbuf = new char[PACKET_SIZE];
+
+    memset(recvbuf, 0, sizeof(char)*PACKET_SIZE);
 
     int bytesReceived = recv(m_socket, recvbuf, PACKET_SIZE, 0);
 
