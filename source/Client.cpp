@@ -32,6 +32,5 @@ Client::~Client() {
 }
 
 void Client::send(Packet *packet) {
-    std::cout << "sending " << packet->getBuffer() << "\n";
     ::send(m_socket, packet->getBuffer(), packet->getLength(), 0);
 }

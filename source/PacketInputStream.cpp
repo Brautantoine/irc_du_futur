@@ -13,7 +13,6 @@ Packet *PacketInputStream::nextPacket() {
     int bytesReceived = recv(m_socket, recvbuf, PACKET_SIZE, 0);
 
     if (bytesReceived > 0) {
-        std::cout << "Bytes received: " << bytesReceived << ": " << recvbuf << " from: "<< m_socket << std::endl;
         return new Packet(recvbuf);
     }
     else if (bytesReceived == 0) {
