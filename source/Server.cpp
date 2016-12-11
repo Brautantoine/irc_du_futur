@@ -8,14 +8,8 @@ Server::Server() : m_clients() {
 }
 
 SOCKET Server::waitForConnection() {
-    SOCKET TempSock = SOCKET_ERROR;
-
-    while (TempSock == SOCKET_ERROR) {
-        TempSock = accept(m_serverSocket, NULL, NULL);
-
-        if (TempSock != SOCKET_ERROR)
-            return TempSock;
-    }
+    SOCKET TempSock = accept(m_serverSocket, NULL, NULL);
+    return TempSock;
 }
 
 void Server::listen() {
@@ -23,7 +17,6 @@ void Server::listen() {
         SOCKET socket = waitForConnection();
 
         Client *client = new Client(socket, this);
-
         addClient(client);
     }
 }

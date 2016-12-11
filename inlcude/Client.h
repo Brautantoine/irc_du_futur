@@ -10,9 +10,9 @@ class Server; //Forward declaration
 class Client {
 private:
     SOCKET m_socket;
-    std::thread m_pis_thread;
-    PacketInputStream m_pis;
     Server *m_server;
+    PacketInputStream m_pis;
+    std::thread m_pis_thread;
 
     void loop();
 public:

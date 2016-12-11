@@ -22,8 +22,7 @@ void Client::loop() {
     m_server->removeClient(this); //Delete this client
 }
 
-Client::Client(SOCKET socket, Server *server) : m_socket(socket), m_pis(socket), m_server(server) {
-    std::thread m_pis_thread(&Client::loop, this);
+Client::Client(SOCKET socket, Server *server) : m_socket(socket), m_server(server), m_pis(socket), m_pis_thread(&Client::loop, this) {
     m_pis_thread.detach();
 }
 Client::~Client() {
