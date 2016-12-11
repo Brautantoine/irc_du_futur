@@ -27,6 +27,7 @@ Client::Client(SOCKET socket, Server *server) : m_socket(socket), m_pis(socket),
     m_pis_thread.detach();
 }
 Client::~Client() {
+    shutdown(m_socket, SD_SEND);
     closesocket(m_socket);
 }
 

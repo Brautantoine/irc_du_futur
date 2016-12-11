@@ -7,8 +7,6 @@ Server *server;
 void quit() {
     std::cout << "shutdown\n";
 
-    //error if has active clients
-
     server->close();
     delete server;
 
