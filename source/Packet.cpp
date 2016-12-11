@@ -1,8 +1,9 @@
-#include "Server.h"
+#include "Packet.h"
+#include <cstring> //for memcpy
 
-Packet::Packet(std::string data) : m_data(data), m_size(m_data.size()) {
+Packet::Packet(char *buffer) : m_buffer(buffer) {
 }
 
-int Packet::getSize() {
-    return m_size;
+std::string Packet::getBuffer() {
+    return m_buffer;
 }

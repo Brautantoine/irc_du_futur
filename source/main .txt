@@ -1,0 +1,204 @@
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <winsock2.h>
+#include <cstring> //for memcpy
+#include <algorithm> //for vector remove
+#include <functional> //for std::bind and std::function
+#include <string>
+
+#define PACKET_SIZE 512
+
+class Packet {
+private:
+    char *m_buf;
+public:
+    Packet(char *buf)
+    {
+        memcpy(buf, m_buf, sizeof(char)*PACKET_SIZE);
+    }
+    ~Packet() {
+        delete m_buf;
+    }
+
+    char *getBuf() {
+        return m_buf;
+    }
+};
+
+class PacketInputStream {
+private:
+    SOCKET m_socket;
+public:
+    PacketInputStream(SOCKET socket) : m_socket(socket) {
+    }
+
+    Packet *nextPacket() {
+        char recvbuf[PACKET_SIZE];
+        memset(recvbuf, 0, sizeof(recvbuf));
+
+        int bytesReceived = recv(m_socket, recvbuf, PACKET_SIZE, 0);
+
+        if (bytesReceived > 0) {
+            std::cout << "Bytes received: " << bytesReceived << ": " << recvbuf << " from: "<< m_socket << std::endl;
+            return new Packet(recvbuf);
+        }
+        else if (bytesReceived == 0) {
+            std::cout << "Connection closed" << std::endl;
+            return nullptr;
+        }
+        else {
+            std::cout << "recv failed: " << WSAGetLastError() << std::endl;
+            return nullptr;
+        }
+    }
+};
+
+class Server; //forward declaration
+class Client {
+private:
+    SOCKET m_socket;
+    std::thread m_pis_thread;
+    PacketInputStream m_pis;
+    Server *m_server;
+
+    void loop() {
+        while (1) {
+            Packet *packet = m_pis.nextPacket();
+
+            if (packet == nullptr) {
+                break;
+            }
+
+            m_server->broadcast(packet->getBuf());
+
+            delete packet;
+        }
+
+        m_server->removeClient(this); //Delete this client
+    }
+public:
+    Client(SOCKET socket, Server *server) : m_socket(socket), m_pis(socket), m_server(server) {
+        std::thread m_pis_thread(&Client::loop, this);
+        m_pis_thread.detach();
+    }
+    ~Client() {
+        closesocket(m_socket);
+    }
+
+    void send(const char *buffer) {
+        ::send(m_socket, buffer, 0, 0);
+    }
+};
+
+class Server {
+private:
+    SOCKET m_serverSocket;
+    std::vector<Client*> m_clients;
+
+    SOCKET waitForConnection() {
+        SOCKET TempSock = SOCKET_ERROR;
+
+        while (TempSock == SOCKET_ERROR) {
+            TempSock = accept(m_serverSocket, NULL, NULL);
+
+            if (TempSock != SOCKET_ERROR)
+                return TempSock;
+        }
+    }
+
+    void listen() {
+        while (1) {
+            SOCKET socket = waitForConnection();
+
+            Client *client = new Client(socket, this);
+
+            addClient(client);
+        }
+    }
+public:
+    Server() : m_clients() {
+    }
+
+    void removeClient(Client *client) {
+        m_clients.erase(std::remove(m_clients.begin(), m_clients.end(), client), m_clients.end());
+        delete client;
+
+        std::cout << "Client removed!\n";
+    }
+
+    void addClient(Client *client) {
+        m_clients.push_back(client);
+
+        std::cout << "Client added!\n";
+    }
+
+    void close() {
+        for (Client *client : m_clients) //DANGER ?
+            delete client;
+        m_clients.clear();
+        WSACleanup();
+    }
+    void start() {
+        WSADATA WsaDat;
+        if(WSAStartup(MAKEWORD(2,2), &WsaDat) != 0) {
+            std::cout << "WSA Initialization failed!\r\n";
+            close();
+            return;
+        }
+
+        m_serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+        if (m_serverSocket == INVALID_SOCKET) {
+            std::cout<<"Socket creation failed.\r\n";
+            close();
+            return;
+        }
+
+        SOCKADDR_IN serverInf;
+        serverInf.sin_family = AF_INET;
+        serverInf.sin_addr.s_addr = INADDR_ANY;
+        serverInf.sin_port = htons(8888);
+
+        if(bind(m_serverSocket, (SOCKADDR*)(&serverInf), sizeof(serverInf)) == SOCKET_ERROR) {
+            std::cout << "Unable to bind socket!\r\n";
+            close();
+            return;
+        }
+
+        ::listen(m_serverSocket, 1);
+
+        std::thread t(&Server::listen, this);
+        t.join();
+    }
+
+    void broadcast(char *buffer) {
+        for (auto client : clients) {
+
+        }
+    }
+};
+
+Server *server;
+
+void quit() {
+    std::cout << "shutdown\n";
+
+    server->close();
+    delete server;
+
+    exit(1);
+}
+
+void signalHandler( int signum ) {
+    std::cout << "Interrupt signal (" << signum << ") received.\n";
+    quit();
+}
+
+int main() {
+    signal(SIGINT, signalHandler);
+    std::cout << "Server started\n";
+    server = new Server();
+	server->start();
+
+	return 0;
+}

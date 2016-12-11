@@ -1,13 +1,16 @@
-#ifndef PACKET_H_INCLUDED
-#define PACKET_H_INCLUDED
+#ifndef PACKET_H
+#define PACKET_H
+
+#include <string>
+#define PACKET_SIZE 512
 
 class Packet {
-public:
-    Packet(std::string data);
-    int getSize();
 private:
-    int m_size;
-    std::string m_data;
+    std::string m_buffer;
+public:
+    Packet(char *buffer);
+
+    std::string getBuffer();
 };
 
-#endif // PACKET_H_INCLUDED
+#endif // PACKET_H

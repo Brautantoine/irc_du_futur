@@ -1,21 +1,28 @@
-#ifndef SERVER_H_INCLUDED
-#define SERVER_H_INCLUDED
+#ifndef SERVER_H
+#define SERVER_H
 
-#include "Packet.h"
-#include "ClientThread.h"
-#include "ConnectionThread.h"
+#include <winsock2.h>
 #include <vector>
 
+class Client; //Forward declaration
+
 class Server {
-public:
-    Server(int port);
-    ~Server();
-    void sendToAll(Packet packet);
-    void sendTo(int clientId);
 private:
-    int port;
-    ConnectionThread m_connThread;
-    std::vector<ClientThread> m_clients;
+    SOCKET m_serverSocket;
+    std::vector<Client*> m_clients;
+
+    SOCKET waitForConnection();
+    void listen();
+
+public:
+    Server();
+
+    void removeClient(Client *client);
+    void addClient(Client *client);
+
+    void close();
+    void start();
+    void broadcast(const char *buffer);
 };
 
-#endif // SERVER_H_INCLUDED
+#endif // SERVER_H
