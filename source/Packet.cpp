@@ -3,14 +3,15 @@
 
 Packet::Packet(char *buffer) : m_buffer(buffer), m_length(strlen(buffer)) {
 }
+
 Packet::~Packet() {
     delete m_buffer;
 }
 
-char *Packet::getBuffer() {
+const char *Packet::getBuffer() {
     return m_buffer;
 }
 
-int Packet::getLength() {
+const int Packet::getLength() {
     return m_length;
 }

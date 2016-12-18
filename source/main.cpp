@@ -1,29 +1,29 @@
-#include "Server.h"
+#include "Globals.h"
 #include <iostream>
 #include <csignal>
 
-Server *server;
+using namespace Globals;
 
 void quit() {
     std::cout << "shutdown\n";
 
-    server->close();
     delete server;
-
     exit(1);
 }
 
-void signalHandler( int signum ) {
-
-    std::cout << "Interrupt signal (" << signum << ") received.\n";
+void signalHandler(int signum) {
+    std::cout << "Interrupt signal:" << signum << std::endl;
     quit();
 }
 
 int main() {
     signal(SIGINT, signalHandler);
+
     std::cout << "Server started\n";
+
+
     server = new Server();
-	server->start();
+    server->loop();
 
 	return 0;
 }

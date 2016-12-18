@@ -5,14 +5,14 @@
 
 class Packet {
 private:
-    char *m_buffer;
-    int m_length;
+    const char *m_buffer;
+    const int m_length;
 public:
     Packet(char *buffer);
     ~Packet();
 
-    char *getBuffer();
-    int getLength();
+    const char *getBuffer();
+    const int getLength();
 };
 
 #endif // PACKET_H
