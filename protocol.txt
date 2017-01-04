@@ -1,0 +1,25 @@
+PROTOCOL_VERSION: 0x1
+
+
+====CLIENT TO SERVER====
+connect
+PACKET_ID: (byte) 0x0
+PROTOCOL_VERSION: (byte)
+
+message
+PACKET_ID: (byte) 0x1
+MESSAGE: (null terminated)
+
+
+
+====SERVER TO CLIENT====
+identification
+PACKET_ID: (byte) 0x0
+PROTOCOL_VERSION: (byte)
+
+ping
+PACKET_ID: (byte) 0x1
+
+message
+PACKET_ID: (byte) 0x2
+MESSAGE: (null terminated, max length 1024)
