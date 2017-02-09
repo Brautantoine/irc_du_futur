@@ -4,9 +4,9 @@ PROTOCOL_VERSION: 0x1
 
 **Data types**
 short:
-  (2 bytes)
+  (2 bytes, big-endian, max 65536 if unsigned)
 string:
-  string_length (2 unsigned bytes, big-endian, max 65535)
+  string_length (unsigned short)
   string_message (char array null terminated)
 
 
