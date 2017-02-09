@@ -9,7 +9,9 @@
 #include <iostream>
 #include <cstring>
 
-Client::Client(SOCKET socket) : m_socket(socket), m_packetInputStream(socket), m_packetOutputStream(socket) {
+Client::Client(SOCKET socket) : m_socket(socket), m_packetInputStream(socket), m_packetOutputStream(socket), m_identified(false), m_username() {
+    m_inetAdress = Globals::server->m_serverNetwork->getInetAdress(m_socket);
+
     std::string serverName("[FR] FluxPhi_CHAN");
     Packet0ServerIdentification iden(serverName);
     m_packetOutputStream.writePacket(&iden);
@@ -27,10 +29,21 @@ void Client::update() {
 
     Packet *p = m_packetInputStream.nextPacket();
 
-    if (dynamic_cast<Packet0ClientIdentification*>(p)) {
-        m_username = std::string(((Packet0ClientIdentification*) p)->getUsername());
+    if (!m_identified) {
+        if (dynamic_cast<Packet0ClientIdentification*>(p)) {
+            m_username = std::string(((Packet0ClientIdentification*) p)->getUsername());
+            m_identified = true;
+            std::cout << "client identified: " << m_username << std::endl;
+            return;
+        }
+        else {
+            //KICK THE PLAYER FROM THE SERVER
+            delete p;
+            return;
+        }
     }
-    else if (dynamic_cast<Packet1Ping*>(p)) {
+
+    if (dynamic_cast<Packet1Ping*>(p)) {
     }
     else if (dynamic_cast<Packet2Message*>(p)) {
         std::string message;
@@ -62,4 +75,8 @@ void Client::send(Packet *packet) {
 
 std::string Client::getUsername() {
     return m_username;
+}
+
+char *Client::getInetAdress() {
+    return m_inetAdress;
 }

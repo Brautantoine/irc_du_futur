@@ -20,6 +20,8 @@ class ServerNetwork {
         void removeClient(Client *client);
         void addClient(Client *client);
 
+        char *getInetAdress(SOCKET socket);
+
         void broadcast(Packet *packet);
 };
 #endif

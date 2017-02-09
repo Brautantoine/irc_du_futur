@@ -12,7 +12,7 @@ string:
 
 
 **CLIENT TO SERVER**
-client_identification:
+client_identification: (the server wont accept any other packet while this one is not sent)
   PACKET_ID: 0x0 (unsigned byte)
   PROTOCOL_VERSION: (unsigned byte)
   USERNAME: (string, max length 32)

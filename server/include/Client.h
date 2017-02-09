@@ -13,6 +13,9 @@ class Client {
         PacketInputStream m_packetInputStream;
         PacketOutputStream m_packetOutputStream;
 
+        char *m_inetAdress;
+        bool m_identified;
+
         std::string m_username;
     public:
         Client(SOCKET socket);
@@ -22,6 +25,7 @@ class Client {
         void send(Packet *packet);
 
         std::string getUsername();
+        char *getInetAdress();
 };
 
 #endif // CLIENT_H

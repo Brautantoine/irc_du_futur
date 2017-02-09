@@ -49,7 +49,7 @@ ServerNetwork::~ServerNetwork() {
 }
 
 bool ServerNetwork::acceptNewClient() {
-    SOCKET TempSock = accept(m_serverSocket, NULL, NULL);
+    SOCKET TempSock = accept(m_serverSocket, nullptr, nullptr);
 
     if (TempSock == INVALID_SOCKET) {
         return false;
@@ -65,6 +65,15 @@ bool ServerNetwork::acceptNewClient() {
     return true;
 }
 
+char *ServerNetwork::getInetAdress(SOCKET socket) {
+    struct sockaddr_in client_info;
+    int addrsize = sizeof(client_info);
+
+    getpeername(socket, (struct sockaddr*)&client_info, &addrsize);
+
+    return inet_ntoa(client_info.sin_addr);
+}
+
 void ServerNetwork::broadcast(Packet *packet) {
     for (Client *client : m_clients) {
         client->send(packet);
@@ -75,11 +84,11 @@ void ServerNetwork::removeClient(Client *client) {
     m_clients.erase(std::remove(m_clients.begin(), m_clients.end(), client), m_clients.end());
     delete client;
 
-    std::cout << "Client removed!\n";
+    std::cout << "closed connection " << client->getInetAdress() << std::endl;
 }
 
 void ServerNetwork::addClient(Client *client) {
     m_clients.push_back(client);
 
-    std::cout << "Client added!\n";
+    std::cout << "new connection from " << client->getInetAdress() << std::endl;
 }
