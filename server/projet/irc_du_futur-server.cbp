@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="irc_du_futur-server" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/irc_du_futur-server" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/irc_du_futur" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add option="-fexceptions" />
+			<Add directory="../../common/include" />
+			<Add directory="../include" />
+		</Compiler>
+		<Linker>
+			<Add library="../../libs/libws2_32.a" />
+		</Linker>
+		<Unit filename="../../common/include/exceptions/ClientDisconnectedException.h" />
+		<Unit filename="../../common/include/exceptions/NothingToReceiveException.h" />
+		<Unit filename="../../common/include/network/DataInputStream.h" />
+		<Unit filename="../../common/include/network/DataOutputStream.h" />
+		<Unit filename="../../common/include/network/PacketInputStream.h" />
+		<Unit filename="../../common/include/network/PacketOutputStream.h" />
+		<Unit filename="../../common/include/network/packets/Packet.h" />
+		<Unit filename="../../common/include/network/packets/Packet0ClientIdentification.h" />
+		<Unit filename="../../common/include/network/packets/Packet0ServerIdentification.h" />
+		<Unit filename="../../common/include/network/packets/Packet1Ping.h" />
+		<Unit filename="../../common/include/network/packets/Packet2Message.h" />
+		<Unit filename="../../common/include/utils/NetworkUtils.h" />
+		<Unit filename="../../common/source/exceptions/ClientDisconnectedException.cpp" />
+		<Unit filename="../../common/source/exceptions/NothingToReceiveException.cpp" />
+		<Unit filename="../../common/source/network/DataInputStream.cpp" />
+		<Unit filename="../../common/source/network/DataOutputStream.cpp" />
+		<Unit filename="../../common/source/network/PacketInputStream.cpp" />
+		<Unit filename="../../common/source/network/PacketOutputStream.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet0ClientIdentification.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet0ServerIdentification.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet1Ping.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet2Message.cpp" />
+		<Unit filename="../../common/source/utils/NetworkUtils.cpp" />
+		<Unit filename="../include/Client.h" />
+		<Unit filename="../include/Globals.h" />
+		<Unit filename="../include/Server.h" />
+		<Unit filename="../include/ServerNetwork.h" />
+		<Unit filename="../source/Client.cpp" />
+		<Unit filename="../source/Globals.cpp" />
+		<Unit filename="../source/Server.cpp" />
+		<Unit filename="../source/ServerNetwork.cpp" />
+		<Unit filename="../source/main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -21,7 +21,6 @@ int main() {
 
     std::cout << "Server started\n";
 
-
     server = new Server();
     server->loop();
 

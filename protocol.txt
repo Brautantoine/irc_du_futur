@@ -1,25 +1,40 @@
+IRC_DU_FUTUR PROTOCOL SPECIFICATION
+===================
 PROTOCOL_VERSION: 0x1
 
-
-====CLIENT TO SERVER====
-connect
-PACKET_ID: (byte) 0x0
-PROTOCOL_VERSION: (byte)
-
-message
-PACKET_ID: (byte) 0x1
-MESSAGE: (null terminated)
+**Data types**
+short:
+  (2 bytes)
+string:
+  string_length (2 unsigned bytes, big-endian, max 65535)
+  string_message (char array null terminated)
 
 
 
-====SERVER TO CLIENT====
-identification
-PACKET_ID: (byte) 0x0
-PROTOCOL_VERSION: (byte)
+**CLIENT TO SERVER**
+client_identification:
+  PACKET_ID: 0x0 (unsigned byte)
+  PROTOCOL_VERSION: (unsigned byte)
+  USERNAME: (string, max length 32)
 
-ping
-PACKET_ID: (byte) 0x1
+ping_echo: (echo from the server ping)
+  PACKET_ID: 0x1 (unsigned byte)
 
-message
-PACKET_ID: (byte) 0x2
-MESSAGE: (null terminated, max length 1024)
+message:
+  PACKET_ID: 0x2 (byte)
+  MESSAGE: (string, max length 10000)
+
+
+
+**SERVER TO CLIENT**
+server_identification:
+  PACKET_ID: 0x0 (unsigned byte)
+  PROTOCOL_VERSION: (unsigned byte)
+  SERVER_NAME: (string, max length 64)
+
+ping:
+  PACKET_ID: 0x1 (unsigned byte)
+
+message:
+  PACKET_ID: 0x2 (unsigned byte)
+  MESSAGE: (string, max length 10000)
