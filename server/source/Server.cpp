@@ -1,13 +1,17 @@
 #include "Server.h"
 #include "Client.h"
 #include "exceptions/ClientDisconnectedException.h"
+#include "ConfigurationServer.h"
 #include "network/packets/Packet.h"
+#include "Globals.h"
 #include <chrono>
 #include <thread>
 #include <iostream>
 
 Server::Server() {
     m_serverNetwork = new ServerNetwork();
+    std::string filename("server.cfg");
+    Globals::cfg = new ConfigurationServer(filename);
 }
 
 Server::~Server() {

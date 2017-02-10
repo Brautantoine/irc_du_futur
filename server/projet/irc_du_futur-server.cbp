@@ -34,6 +34,7 @@
 			<Add option="-fexceptions" />
 			<Add directory="../../common/include" />
 			<Add directory="../include" />
+			<Add directory="../../libs" />
 		</Compiler>
 		<Linker>
 			<Add library="../../libs/libws2_32.a" />

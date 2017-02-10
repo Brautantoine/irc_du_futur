@@ -1,5 +1,7 @@
 #include "Globals.h"
 
 namespace Globals {
-    Server *server(nullptr);
+    Server *server = nullptr;
+
+    ConfigurationServer *cfg = nullptr;
 }

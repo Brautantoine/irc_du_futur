@@ -12,9 +12,11 @@
 Client::Client(SOCKET socket) : m_socket(socket), m_packetInputStream(socket), m_packetOutputStream(socket), m_identified(false), m_username() {
     m_inetAdress = Globals::server->m_serverNetwork->getInetAdress(m_socket);
 
-    std::string serverName("[FR] FluxPhi_CHAN");
-    Packet0ServerIdentification iden(serverName);
-    m_packetOutputStream.writePacket(&iden);
+    Packet0ServerIdentification iden(Globals::cfg->getServername());
+    send(&iden);
+
+    Packet2Message motd(Globals::cfg->getMotd());
+    send(&motd);
 }
 
 Client::~Client() {
