@@ -16,7 +16,7 @@ class Packet0ServerIdentification : public Packet {
         Packet0ServerIdentification(std::string servername);
 
         std::string getServername();
-        virtual unsigned int getLength();
+        virtual unsigned int getLength() override;
 };
 
 #endif

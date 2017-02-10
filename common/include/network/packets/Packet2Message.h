@@ -17,7 +17,7 @@ class Packet2Message : public Packet {
 
         std::string getMessage();
 
-        virtual unsigned int getLength();
+        virtual unsigned int getLength() override;
 };
 
 #endif

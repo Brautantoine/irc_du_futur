@@ -16,7 +16,7 @@ class Packet0ClientIdentification : public Packet {
         Packet0ClientIdentification(std::string username);
 
         std::string getUsername();
-        virtual unsigned int getLength();
+        virtual unsigned int getLength() override;
 };
 
 #endif

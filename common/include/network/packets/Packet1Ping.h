@@ -7,7 +7,7 @@ class Packet1Ping : public Packet {
     public:
         Packet1Ping();
 
-        virtual unsigned int getLength();
+        virtual unsigned int getLength() override;
 };
 
 #endif
