@@ -2,10 +2,6 @@
 #include "utils/NetworkUtils.h"
 #include <cstring>
 
-Packet0ServerIdentification::Packet0ServerIdentification(DataInputStream *dis) : Packet(0x0) {
-    m_servername = dis->readString();
-}
-
 Packet0ServerIdentification::Packet0ServerIdentification(std::string servername) : Packet(0x0), m_servername(servername) {
     m_payload = new char[getLength()];
 

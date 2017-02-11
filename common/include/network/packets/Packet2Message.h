@@ -1,8 +1,7 @@
-#include "network/packets/Packet.h"
-
 #ifndef PACKET2_MESSAGE_H
 #define PACKET2_MESSAGE_H
 
+#include "network/packets/Packet.h"
 #include "network/DataInputStream.h"
 #include <string>
 
