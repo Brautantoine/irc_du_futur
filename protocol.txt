@@ -24,6 +24,9 @@ message:
   PACKET_ID: 0x2 (byte)
   MESSAGE: (string, max length 10000)
 
+disconnect: (optional)
+  PACKET_ID: 0x3 (unsigned byte)
+  REASON: (string, max length 64)
 
 
 **SERVER TO CLIENT**
@@ -38,3 +41,7 @@ ping:
 message:
   PACKET_ID: 0x2 (unsigned byte)
   MESSAGE: (string, max length 10000)
+
+disconnect: (kick a client)
+  PACKET_ID: 0x3 (unsigned byte)
+  REASON: (string, max length 64)

@@ -5,6 +5,7 @@
 #include "network/packets/Packet0ClientIdentification.h"
 #include "network/packets/Packet1Ping.h"
 #include "network/packets/Packet2Message.h"
+#include "network/packets/Packet3Disconnect.h"
 #include "exceptions/ClientDisconnectedException.h"
 #include <iostream>
 #include <cstring>
@@ -33,14 +34,20 @@ void Client::update() {
 
     if (!m_identified) {
         if (dynamic_cast<Packet0ClientIdentification*>(p)) {
+            if (((Packet0ClientIdentification*) p)->getProtocol() != Globals::PROTOCOL_VERSION) {
+                delete p;
+                kick("Ur using different protocol! you:" + std::to_string(((Packet0ClientIdentification*) p)->getProtocol()) + " me:" + std::to_string(Globals::PROTOCOL_VERSION));
+                return;
+            }
+
             m_username = std::string(((Packet0ClientIdentification*) p)->getUsername());
             m_identified = true;
             std::cout << "client identified: " << m_username << std::endl;
             return;
         }
         else {
-            //KICK THE PLAYER FROM THE SERVER
             delete p;
+            kick("U need to show me ur id papers (packet0), go away");
             return;
         }
     }
@@ -73,6 +80,12 @@ void Client::send(Packet *packet) {
     catch (const std::exception &e) {
         Globals::server->m_serverNetwork->removeClient(this);
     }
+}
+
+void Client::kick(std::string reason) {
+    Packet3Disconnect packet(reason);
+    send(&packet);
+    Globals::server->m_serverNetwork->removeClient(this);
 }
 
 std::string Client::getUsername() {

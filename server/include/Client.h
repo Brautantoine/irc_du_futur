@@ -23,6 +23,7 @@ class Client {
 
         void update();
         void send(Packet *packet);
+        void kick(std::string reason);
 
         std::string getUsername();
         char *getInetAdress();

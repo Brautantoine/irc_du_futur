@@ -39,6 +39,7 @@
 		<Linker>
 			<Add library="../../libs/libws2_32.a" />
 		</Linker>
+		<Unit filename="../../common/include/config/Configuration.h" />
 		<Unit filename="../../common/include/exceptions/ClientDisconnectedException.h" />
 		<Unit filename="../../common/include/exceptions/NothingToReceiveException.h" />
 		<Unit filename="../../common/include/network/DataInputStream.h" />
@@ -51,6 +52,7 @@
 		<Unit filename="../../common/include/network/packets/Packet1Ping.h" />
 		<Unit filename="../../common/include/network/packets/Packet2Message.h" />
 		<Unit filename="../../common/include/utils/NetworkUtils.h" />
+		<Unit filename="../../common/source/config/Configuration.cpp" />
 		<Unit filename="../../common/source/exceptions/ClientDisconnectedException.cpp" />
 		<Unit filename="../../common/source/exceptions/NothingToReceiveException.cpp" />
 		<Unit filename="../../common/source/network/DataInputStream.cpp" />
@@ -64,10 +66,12 @@
 		<Unit filename="../../common/source/network/packets/Packet2Message.cpp" />
 		<Unit filename="../../common/source/utils/NetworkUtils.cpp" />
 		<Unit filename="../include/Client.h" />
+		<Unit filename="../include/ConfigurationServer.h" />
 		<Unit filename="../include/Globals.h" />
 		<Unit filename="../include/Server.h" />
 		<Unit filename="../include/ServerNetwork.h" />
 		<Unit filename="../source/Client.cpp" />
+		<Unit filename="../source/ConfigurationServer.cpp" />
 		<Unit filename="../source/Globals.cpp" />
 		<Unit filename="../source/Server.cpp" />
 		<Unit filename="../source/ServerNetwork.cpp" />

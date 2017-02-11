@@ -3,8 +3,6 @@
 
 #include "ServerNetwork.h"
 
-#define SERVER_PROTOCOL_VERSION 0x1
-
 class Server {
     public:
         ServerNetwork *m_serverNetwork;

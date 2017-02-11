@@ -7,6 +7,8 @@
 namespace Globals {
     extern Server *server;
     extern ConfigurationServer *cfg;
+
+    extern const unsigned short int PROTOCOL_VERSION;
 }
 
 #endif

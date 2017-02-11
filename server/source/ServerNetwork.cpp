@@ -82,9 +82,9 @@ void ServerNetwork::broadcast(Packet *packet) {
 
 void ServerNetwork::removeClient(Client *client) {
     m_clients.erase(std::remove(m_clients.begin(), m_clients.end(), client), m_clients.end());
-    delete client;
 
     std::cout << "closed connection " << client->getInetAdress() << std::endl;
+    delete client;
 }
 
 void ServerNetwork::addClient(Client *client) {
