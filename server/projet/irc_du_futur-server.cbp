@@ -51,6 +51,7 @@
 		<Unit filename="../../common/include/network/packets/Packet0ServerIdentification.h" />
 		<Unit filename="../../common/include/network/packets/Packet1Ping.h" />
 		<Unit filename="../../common/include/network/packets/Packet2Message.h" />
+		<Unit filename="../../common/include/network/packets/Packet3Disconnect.h" />
 		<Unit filename="../../common/include/utils/NetworkUtils.h" />
 		<Unit filename="../../common/source/config/Configuration.cpp" />
 		<Unit filename="../../common/source/exceptions/ClientDisconnectedException.cpp" />
@@ -64,6 +65,7 @@
 		<Unit filename="../../common/source/network/packets/Packet0ServerIdentification.cpp" />
 		<Unit filename="../../common/source/network/packets/Packet1Ping.cpp" />
 		<Unit filename="../../common/source/network/packets/Packet2Message.cpp" />
+		<Unit filename="../../common/source/network/packets/Packet3Disconnect.cpp" />
 		<Unit filename="../../common/source/utils/NetworkUtils.cpp" />
 		<Unit filename="../include/Client.h" />
 		<Unit filename="../include/ConfigurationServer.h" />

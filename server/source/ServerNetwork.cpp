@@ -1,5 +1,6 @@
 #include "ServerNetwork.h"
 
+#include "Globals.h"
 #include <algorithm>
 #include <iostream>
 
@@ -60,8 +61,12 @@ bool ServerNetwork::acceptNewClient() {
     ioctlsocket(TempSock, FIONBIO, &iMode);
 
     Client *client = new Client(TempSock);
-    addClient(client);
+    if (m_clients.size() >= Globals::cfg->getMaxConnections()) {
+        client->kick("Server is full!");
+        return false;
+    }
 
+    addClient(client);
     return true;
 }
 

@@ -4,9 +4,6 @@
 #include "config/Configuration.h"
 
 class ConfigurationServer : public Configuration {
-    private:
-        std::string m_servername;
-        std::string m_motd;
     public:
         ConfigurationServer(std::string &filename);
 
@@ -17,6 +14,9 @@ class ConfigurationServer : public Configuration {
 
         void setMotd(std::string motd);
         std::string getMotd();
+
+        void setMaxConnections(int maxconnections);
+        int getMaxConnections();
 };
 
 #endif

@@ -15,9 +15,6 @@ Client::Client(SOCKET socket) : m_socket(socket), m_packetInputStream(socket), m
 
     Packet0ServerIdentification iden(Globals::cfg->getServername());
     send(&iden);
-
-    Packet2Message motd(Globals::cfg->getMotd());
-    send(&motd);
 }
 
 Client::~Client() {
@@ -43,6 +40,10 @@ void Client::update() {
             m_username = std::string(((Packet0ClientIdentification*) p)->getUsername());
             m_identified = true;
             std::cout << "client identified: " << m_username << std::endl;
+
+            Packet2Message motd(Globals::cfg->getMotd());
+            send(&motd);
+
             return;
         }
         else {
