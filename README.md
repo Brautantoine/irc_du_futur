@@ -6,4 +6,4 @@ all u need to know is in the title
 ----
 using:
 * winsock2
-* c++11
+* c++11 ([patch string codeblocks mingw](http://tehsausage.com/mingw-to-string))
