@@ -10,7 +10,7 @@
 
 Server::Server() {
     m_serverNetwork = new ServerNetwork();
-    std::string filename("server.cfg");
+    std::string filename("server.json");
     Globals::cfg = new ConfigurationServer(filename);
 }
 
