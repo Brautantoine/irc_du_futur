@@ -34,7 +34,7 @@
 			<Add option="-fexceptions" />
 			<Add directory="../../common/include" />
 			<Add directory="../include" />
-			<Add directory="../../libs" />
+			<Add directory="../../libs/json/src" />
 		</Compiler>
 		<Linker>
 			<Add library="../../libs/libws2_32.a" />
@@ -67,16 +67,22 @@
 		<Unit filename="../../common/source/network/packets/Packet2Message.cpp" />
 		<Unit filename="../../common/source/network/packets/Packet3Disconnect.cpp" />
 		<Unit filename="../../common/source/utils/NetworkUtils.cpp" />
-		<Unit filename="../include/Client.h" />
 		<Unit filename="../include/ConfigurationServer.h" />
 		<Unit filename="../include/Globals.h" />
 		<Unit filename="../include/Server.h" />
+		<Unit filename="../include/ServerClient.h" />
 		<Unit filename="../include/ServerNetwork.h" />
-		<Unit filename="../source/Client.cpp" />
+		<Unit filename="../include/bindings/LuaEventMessage.h" />
+		<Unit filename="../include/bindings/LuaServer.h" />
+		<Unit filename="../include/bindings/LuaServerClient.h" />
 		<Unit filename="../source/ConfigurationServer.cpp" />
 		<Unit filename="../source/Globals.cpp" />
 		<Unit filename="../source/Server.cpp" />
+		<Unit filename="../source/ServerClient.cpp" />
 		<Unit filename="../source/ServerNetwork.cpp" />
+		<Unit filename="../source/bindings/LuaEventMessage.cpp" />
+		<Unit filename="../source/bindings/LuaServer.cpp" />
+		<Unit filename="../source/bindings/LuaServerClient.cpp" />
 		<Unit filename="../source/main.cpp" />
 		<Extensions>
 			<code_completion />
