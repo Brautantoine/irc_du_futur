@@ -2,7 +2,7 @@
 #define SERVERNETWORK_H
 
 #include "network/packets/Packet.h"
-#include "Client.h"
+#include "ServerClient.h"
 #include <winsock2.h>
 #include <vector>
 

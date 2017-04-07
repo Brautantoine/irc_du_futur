@@ -35,11 +35,19 @@
 			<Add directory="../../common/include" />
 			<Add directory="../include" />
 			<Add directory="../../libs/json/src" />
+			<Add directory="../../libs/lua-5.3.3_Win32_mingw4_lib/include" />
+			<Add directory="../../libs/dirent-1.21/include" />
 		</Compiler>
 		<Linker>
-			<Add library="../../libs/libws2_32.a" />
+			<Add option="-llua53" />
+			<Add library="../../libs/winsock2/libws2_32.a" />
+			<Add directory="../../libs/lua-5.3.3_Win32_mingw4_lib" />
 		</Linker>
 		<Unit filename="../../common/include/config/Configuration.h" />
+		<Unit filename="../../common/include/events/Event.h" />
+		<Unit filename="../../common/include/events/EventClientConnect.h" />
+		<Unit filename="../../common/include/events/EventClientDisconnect.h" />
+		<Unit filename="../../common/include/events/EventMessage.h" />
 		<Unit filename="../../common/include/exceptions/ClientDisconnectedException.h" />
 		<Unit filename="../../common/include/exceptions/NothingToReceiveException.h" />
 		<Unit filename="../../common/include/network/DataInputStream.h" />
@@ -53,7 +61,12 @@
 		<Unit filename="../../common/include/network/packets/Packet2Message.h" />
 		<Unit filename="../../common/include/network/packets/Packet3Disconnect.h" />
 		<Unit filename="../../common/include/utils/NetworkUtils.h" />
+		<Unit filename="../../common/include/utils/StringUtils.h" />
 		<Unit filename="../../common/source/config/Configuration.cpp" />
+		<Unit filename="../../common/source/events/Event.cpp" />
+		<Unit filename="../../common/source/events/EventClientConnect.cpp" />
+		<Unit filename="../../common/source/events/EventClientDisconnect.cpp" />
+		<Unit filename="../../common/source/events/EventMessage.cpp" />
 		<Unit filename="../../common/source/exceptions/ClientDisconnectedException.cpp" />
 		<Unit filename="../../common/source/exceptions/NothingToReceiveException.cpp" />
 		<Unit filename="../../common/source/network/DataInputStream.cpp" />
@@ -67,23 +80,30 @@
 		<Unit filename="../../common/source/network/packets/Packet2Message.cpp" />
 		<Unit filename="../../common/source/network/packets/Packet3Disconnect.cpp" />
 		<Unit filename="../../common/source/utils/NetworkUtils.cpp" />
+		<Unit filename="../../common/source/utils/StringUtils.cpp" />
 		<Unit filename="../include/ConfigurationServer.h" />
 		<Unit filename="../include/Globals.h" />
 		<Unit filename="../include/Server.h" />
 		<Unit filename="../include/ServerClient.h" />
 		<Unit filename="../include/ServerNetwork.h" />
-		<Unit filename="../include/bindings/LuaEventMessage.h" />
-		<Unit filename="../include/bindings/LuaServer.h" />
-		<Unit filename="../include/bindings/LuaServerClient.h" />
+		<Unit filename="../include/script/LuaVirtualMachine.h" />
+		<Unit filename="../include/script/Script.h" />
+		<Unit filename="../include/script/ScriptManager.h" />
+		<Unit filename="../include/script/bindings/LuaEventMessage.h" />
+		<Unit filename="../include/script/bindings/LuaServer.h" />
+		<Unit filename="../include/script/bindings/LuaServerClient.h" />
 		<Unit filename="../source/ConfigurationServer.cpp" />
 		<Unit filename="../source/Globals.cpp" />
 		<Unit filename="../source/Server.cpp" />
 		<Unit filename="../source/ServerClient.cpp" />
 		<Unit filename="../source/ServerNetwork.cpp" />
-		<Unit filename="../source/bindings/LuaEventMessage.cpp" />
-		<Unit filename="../source/bindings/LuaServer.cpp" />
-		<Unit filename="../source/bindings/LuaServerClient.cpp" />
 		<Unit filename="../source/main.cpp" />
+		<Unit filename="../source/script/LuaVirtualMachine.cpp" />
+		<Unit filename="../source/script/Script.cpp" />
+		<Unit filename="../source/script/ScriptManager.cpp" />
+		<Unit filename="../source/script/bindings/LuaEventMessage.cpp" />
+		<Unit filename="../source/script/bindings/LuaServer.cpp" />
+		<Unit filename="../source/script/bindings/LuaServerClient.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

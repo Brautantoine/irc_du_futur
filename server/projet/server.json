@@ -1,0 +1,7 @@
+{
+    "server": {
+        "max_connections": 64,
+        "motd": "Welcome on the server !",
+        "name": "irc_du_futur default server"
+    }
+}

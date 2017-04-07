@@ -1,4 +1,4 @@
-#include "Client.h"
+#include "ServerClient.h"
 #include "Globals.h"
 #include "network/packets/Packet2Message.h"
 #include "network/packets/Packet0ServerIdentification.h"
@@ -56,14 +56,13 @@ void Client::update() {
     if (dynamic_cast<Packet1Ping*>(p)) {
     }
     else if (dynamic_cast<Packet2Message*>(p)) {
-        std::string message;
-        message += getUsername();
-        message += "> ";
-        message += ((Packet2Message*) p)->getMessage();
+        std::string message(((Packet2Message*) p)->getMessage());
 
         Packet2Message *packet_message = new Packet2Message(message);
-
         Globals::server->m_serverNetwork->broadcast(packet_message);
+
+        EventMessage e(this, message);
+        Globals::scriptManager->callEvent(&e);
 
         delete packet_message;
     }
